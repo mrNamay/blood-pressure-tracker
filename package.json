@@ -12,8 +12,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/morgan": "^1.9.4",
     "@types/node": "^22.10.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "cors": "^2.8.5"
   }
 }
