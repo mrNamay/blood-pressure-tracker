@@ -12,17 +12,32 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^5.0.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.12",
+    "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.4",
     "@types/node": "^22.10.5",
+    "@types/passport": "^1.0.17",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/passport-local": "^1.0.38",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.3",
     "morgan": "^1.10.0",
-    "cors": "^2.8.5"
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
