@@ -61,6 +61,8 @@ authRouter.post('/register', AuthController.register);
  *               properties:
  *                 token:
  *                   type: string
+ *                 userId:
+ *                   type: string
  *       401:
  *         description: Unauthorized
  */
