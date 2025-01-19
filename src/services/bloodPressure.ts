@@ -37,22 +37,18 @@ export default class BloodPressureService {
    */
   static async getReadingsByUser(
     userId: string,
-    page: number = 1,
-    limit: number = 10
-  ): Promise<{ readings: IBloodPressureReading[]; total: number; totalPages: number; currentPage: number }> {
-    const skip = (page - 1) * limit;
+    startDate?: Date,
+    endDate?: Date
+  ): Promise<IBloodPressureReading[]> {
+    const query: any = { userId };
 
-    const [readings, total] = await Promise.all([
-      BloodPressureReading.find({ userId }).sort({ timestamp: -1 }).skip(skip).limit(limit),
-      BloodPressureReading.countDocuments({ userId }),
-    ]);
+    if (startDate || endDate) {
+      query.timestamp = {};
+      if (startDate) query.timestamp.$gte = startDate;
+      if (endDate) query.timestamp.$lte = endDate;
+    }
 
-    return {
-      readings,
-      total,
-      totalPages: Math.ceil(total / limit),
-      currentPage: page,
-    };
+    return await BloodPressureReading.find(query).sort({ timestamp: -1 });
   }
 
   /**

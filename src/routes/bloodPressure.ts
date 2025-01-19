@@ -54,17 +54,19 @@ bloodPressureRouter.post('/', authenticateJwt, BloodPressureController.addReadin
  *         required: true
  *         description: ID of the user
  *       - in: query
- *         name: page
+ *         name: startDate
  *         schema:
- *           type: integer
- *           default: 1
- *         description: Page number for pagination
+ *           type: string
+ *           format: date
+ *         required: false
+ *         description: Start date for the blood pressure reading.
  *       - in: query
- *         name: limit
+ *         name: endDate
  *         schema:
- *           type: integer
- *           default: 10
- *         description: Number of readings per page
+ *           type: string
+ *           format: date
+ *         required: false
+ *         description: End date for the blood pressure reading.
  *     responses:
  *       200:
  *         description: Blood pressure readings retrieved successfully

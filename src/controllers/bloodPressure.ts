@@ -21,8 +21,9 @@ class BloodPressureController {
     static async getReadingsByUser(req: Request, res: Response) {
         try {
             const { userId } = req.params;
-            const { page, limit } = req.query
-            const readings = await BloodPressureService.getReadingsByUser(userId, Number(page), Number(limit));
+            const startDate = req.query.startDate ? new Date(req.query.startDate.toString()) : undefined;
+            const endDate = req.query.endDate ? new Date(req.query.endDate.toString()) : undefined;
+            const readings = await BloodPressureService.getReadingsByUser(userId, startDate, endDate);
             res.status(200).json({ message: 'Blood pressure readings retrieved successfully.', readings });
         } catch (error: any) {
             res.status(500).json({ error: error.message });
