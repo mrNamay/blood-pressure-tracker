@@ -27,6 +27,8 @@ const bloodPressureRouter = Router();
  *                 type: number
  *               pulse:
  *                 type: number
+ *               notes:
+ *                 type: string
  *             required: [userId, systolic, diastolic, pulse]
  *     responses:
  *       201:

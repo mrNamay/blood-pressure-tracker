@@ -14,13 +14,15 @@ export default class BloodPressureService {
     userId: string,
     systolic: number,
     diastolic: number,
-    pulse: number
+    pulse: number,
+    notes?: string
   ): Promise<IBloodPressureReading> {
     const reading = new BloodPressureReading({
       userId,
       systolic,
       diastolic,
       pulse,
+      notes
     });
 
     return await reading.save();

@@ -7,8 +7,8 @@ class BloodPressureController {
      */
     static async addReading(req: Request, res: Response) {
         try {
-            const { userId, systolic, diastolic, pulse } = req.body;
-            const reading = await BloodPressureService.addReading(userId, systolic, diastolic, pulse);
+            const { userId, systolic, diastolic, pulse, notes } = req.body;
+            const reading = await BloodPressureService.addReading(userId, systolic, diastolic, pulse, notes);
             res.status(201).json({ message: 'Blood pressure reading added successfully.', reading });
         } catch (error: any) {
             res.status(400).json({ error: error.message });
