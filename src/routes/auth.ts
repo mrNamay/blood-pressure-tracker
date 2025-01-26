@@ -28,8 +28,19 @@ const authRouter = Router();
  *     responses:
  *       201:
  *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message: 
+ *                   type: string
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  *       400:
- *         description: Bad request
+ *         $ref: '#/components/responses/BadRequestError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 authRouter.post('/register', AuthController.register);
 
@@ -64,7 +75,11 @@ authRouter.post('/register', AuthController.register);
  *                 userId:
  *                   $ref: '#/components/schemas/UserId'
  *       401:
- *         description: Unauthorized
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequestError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 authRouter.post('/login', passport.authenticate('local', { session: false }), AuthController.login);
 
@@ -84,7 +99,9 @@ authRouter.post('/login', passport.authenticate('local', { session: false }), Au
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       401:
- *         description: Unauthorized (Invalid or expired token)
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 authRouter.get('/profile', authenticateJwt, AuthController.getMyProfile);
 

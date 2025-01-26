@@ -43,7 +43,7 @@ const bloodPressureRouter = Router();
  *                 reading:
  *                   $ref: '#/components/schemas/BloodPressureReading'
  *       400:
- *         description: Bad request
+ *         $ref: '#/components/responses/BadRequestError'
  */
 bloodPressureRouter.post('/', authenticateJwt, BloodPressureController.addReading);
 
@@ -90,8 +90,10 @@ bloodPressureRouter.post('/', authenticateJwt, BloodPressureController.addReadin
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/BloodPressureReading'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
  *       500:
- *         description: Server error
+ *         $ref: '#/components/responses/InternalServerError'
  */
 bloodPressureRouter.get('/:userId', authenticateJwt, BloodPressureController.getReadingsByUser);
 
@@ -123,7 +125,11 @@ bloodPressureRouter.get('/:userId', authenticateJwt, BloodPressureController.get
  *                 reading:
  *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
- *         description: Reading not found
+ *         $ref: '#/components/responses/NotFoundError'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 bloodPressureRouter.get('/reading/:readingId', authenticateJwt, BloodPressureController.getReadingById);
 
@@ -170,7 +176,13 @@ bloodPressureRouter.get('/reading/:readingId', authenticateJwt, BloodPressureCon
  *                 updatedReading:
  *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
- *         description: Reading not found
+ *         $ref: '#/components/responses/NotFoundError'
+ *       400:
+ *         $ref: '#/components/responses/BadRequestError'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 bloodPressureRouter.put('/reading/:readingId', authenticateJwt, BloodPressureController.updateReading);
 
@@ -202,7 +214,11 @@ bloodPressureRouter.put('/reading/:readingId', authenticateJwt, BloodPressureCon
  *                 deletedReading:
  *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
- *         description: Reading not found
+ *         $ref: '#/components/responses/NotFoundError'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
  */
 bloodPressureRouter.delete('/reading/:readingId', authenticateJwt, BloodPressureController.deleteReading);
 
@@ -238,8 +254,19 @@ bloodPressureRouter.delete('/reading/:readingId', authenticateJwt, BloodPressure
  *     responses:
  *       200:
  *         description: Average blood pressure readings retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 averages:
+ *                   $ref: '#/components/schemas/ReadingsAverage'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
  *       500:
- *         description: Server error
+ *         $ref: '#/components/responses/InternalServerError'
  */
 bloodPressureRouter.get('/:userId/averages', authenticateJwt, BloodPressureController.getAverageReadings);
 

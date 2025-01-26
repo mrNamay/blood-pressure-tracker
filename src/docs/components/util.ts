@@ -4,9 +4,10 @@
  *   schemas:
  *     Email:
  *       type: string
- *       format: email
  *       description: Should be a valid email address.
  *       example: "john.doe@example.com"
+ *       maxLength: 255
+ *       format: email
  *     Password:
  *       type: string
  *       description: Should be a valid password.

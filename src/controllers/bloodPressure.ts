@@ -11,7 +11,7 @@ class BloodPressureController {
             const reading = await BloodPressureService.addReading(userId, systolic, diastolic, pulse, notes);
             res.status(201).json({ message: 'Blood pressure reading added successfully.', reading });
         } catch (error: any) {
-            res.status(400).json({ error: error.message });
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -26,7 +26,7 @@ class BloodPressureController {
             const readings = await BloodPressureService.getReadingsByUser(userId, startDate, endDate);
             res.status(200).json({ message: 'Blood pressure readings retrieved successfully.', readings });
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ message: error.message });
         }
     }
 
@@ -43,7 +43,7 @@ class BloodPressureController {
             }
             res.status(200).json({ message: 'Blood pressure reading retrieved successfully.', reading });
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ message: error.message });
         }
     }
 
@@ -61,7 +61,7 @@ class BloodPressureController {
             }
             res.status(200).json({ message: 'Blood pressure reading updated successfully.', updatedReading });
         } catch (error: any) {
-            res.status(400).json({ error: error.message });
+            res.status(400).json({ message: error.message });
         }
     }
 
@@ -78,7 +78,7 @@ class BloodPressureController {
             }
             res.status(200).json({ message: 'Blood pressure reading deleted successfully.', deletedReading });
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ message: error.message });
         }
     }
 
@@ -93,7 +93,7 @@ class BloodPressureController {
             const averages = await BloodPressureService.getAverageReadings(userId, startDate, endDate);
             res.status(200).json({ message: 'Average blood pressure readings retrieved successfully.', averages });
         } catch (error: any) {
-            res.status(500).json({ error: error.message });
+            res.status(500).json({ message: error.message });
         }
     }
 }
