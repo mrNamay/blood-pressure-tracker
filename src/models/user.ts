@@ -12,7 +12,7 @@ export interface IUser extends Document<Types.ObjectId> {
 // Define the User schema
 const UserSchema: Schema = new Schema<IUser>(
     {
-        name: { type: String, required: true },
+        name: { type: String, required: true, maxLength: 255 },
         email: { type: String, required: true, unique: true },
         passwordHash: { type: String, required: true },
     }, { timestamps: true }

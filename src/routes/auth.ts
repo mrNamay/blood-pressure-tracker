@@ -23,7 +23,7 @@ const authRouter = Router();
  *               email:
  *                 $ref: '#/components/schemas/Email'
  *               password:
- *                 type: string
+ *                 $ref: '#/components/schemas/Password'
  *             required: [name, email, password]
  *     responses:
  *       201:
@@ -49,7 +49,7 @@ authRouter.post('/register', AuthController.register);
  *               email:
  *                 $ref: '#/components/schemas/Email'
  *               password:
- *                 type: string
+ *                 $ref: '#/components/schemas/Password'
  *             required: [email, password]
  *     responses:
  *       200:
@@ -62,7 +62,7 @@ authRouter.post('/register', AuthController.register);
  *                 token:
  *                   type: string
  *                 userId:
- *                   type: string
+ *                   $ref: '#/components/schemas/UserId'
  *       401:
  *         description: Unauthorized
  */

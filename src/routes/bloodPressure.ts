@@ -22,17 +22,26 @@ const bloodPressureRouter = Router();
  *               userId:
  *                 type: string
  *               systolic:
- *                 type: number
+ *                 $ref: '#/components/schemas/SystolicReading'
  *               diastolic:
- *                 type: number
+ *                 $ref: '#/components/schemas/DiastolicReading'
  *               pulse:
- *                 type: number
+ *                 $ref: '#/components/schemas/Pulse'
  *               notes:
- *                 type: string
+ *                 $ref: '#/components/schemas/ReadingNotes'
  *             required: [userId, systolic, diastolic, pulse]
  *     responses:
  *       201:
  *         description: Blood pressure reading added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 reading:
+ *                   $ref: '#/components/schemas/BloodPressureReading'
  *       400:
  *         description: Bad request
  */
@@ -70,6 +79,17 @@ bloodPressureRouter.post('/', authenticateJwt, BloodPressureController.addReadin
  *     responses:
  *       200:
  *         description: Blood pressure readings retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 readings:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/BloodPressureReading'
  *       500:
  *         description: Server error
  */
@@ -93,6 +113,15 @@ bloodPressureRouter.get('/:userId', authenticateJwt, BloodPressureController.get
  *     responses:
  *       200:
  *         description: Blood pressure reading retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 reading:
+ *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
  *         description: Reading not found
  */
@@ -121,14 +150,25 @@ bloodPressureRouter.get('/reading/:readingId', authenticateJwt, BloodPressureCon
  *             type: object
  *             properties:
  *               systolic:
- *                 type: number
+ *                 $ref: '#/components/schemas/SystolicReading'
  *               diastolic:
- *                 type: number
+ *                 $ref: '#/components/schemas/DiastolicReading'
  *               pulse:
- *                 type: number
+ *                 $ref: '#/components/schemas/Pulse'
+ *               notes:
+ *                 $ref: '#/components/schemas/ReadingNotes'
  *     responses:
  *       200:
  *         description: Blood pressure reading updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 updatedReading:
+ *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
  *         description: Reading not found
  */
@@ -152,6 +192,15 @@ bloodPressureRouter.put('/reading/:readingId', authenticateJwt, BloodPressureCon
  *     responses:
  *       200:
  *         description: Blood pressure reading deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 deletedReading:
+ *                   $ref: '#/components/schemas/BloodPressureReading'
  *       404:
  *         description: Reading not found
  */

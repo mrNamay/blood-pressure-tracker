@@ -18,7 +18,7 @@ const BloodPressureReadingSchema: Schema = new Schema<IBloodPressureReading>(
         diastolic: { type: Number, required: true, min: 30, max: 150 },
         pulse: { type: Number, required: true, min: 30, max: 200 },
         timestamp: { type: Date, default: Date.now },
-        notes: { type: String }
+        notes: { type: String, maxLength: 255 },
     },
     { timestamps: true }
 );
