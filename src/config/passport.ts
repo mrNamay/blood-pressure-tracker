@@ -4,6 +4,12 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import bcrypt from 'bcrypt';
 import User, { IUser } from '../models/user';
 
+export interface ITokenUser {
+  id: string;
+  email: string;
+  name: string;
+}
+
 // Local Strategy for email/password authentication
 passport.use(
   new LocalStrategy(
@@ -23,7 +29,7 @@ passport.use(
         }
 
         // Authentication successful
-        return done(null, user);
+        return done(null, { id: user._id.toString(), email: user.email, name: user.name } as ITokenUser, { message: 'Authentication successful.' });
       } catch (error) {
         return done({ message: 'An error occurred during authentication.' });
       }
@@ -40,32 +46,12 @@ passport.use(
     },
     async (jwtPayload, done) => {
       try {
-        // Find user by ID from JWT payload
-        const user = await User.findById(jwtPayload.id);
-        if (!user) {
-          return done(null, false, { message: 'User not found.' });
-        }
-        return done(null, user);
+        return done(null, jwtPayload);
       } catch (error) {
         return done({ message: 'An error occurred while verifying the token.' });
       }
     }
   )
 );
-
-// Serialize user to store in session (if using sessions)
-passport.serializeUser((user, done) => {
-  done(null, (user as IUser)._id);
-});
-
-// Deserialize user from session
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done({ message: 'An error occurred during session deserialization.' }, null);
-  }
-});
 
 export default passport;

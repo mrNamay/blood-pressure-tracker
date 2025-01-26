@@ -81,7 +81,18 @@ authRouter.post('/register', AuthController.register);
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
-authRouter.post('/login', passport.authenticate('local', { session: false }), AuthController.login);
+authRouter.post('/login', (req, res, next) => {
+    passport.authenticate('local', { session: false }, (err: any, user: any, info: any) => {
+        if (err) {
+            return res.status(400).send({ message: 'error' });
+        }
+        if (!user) {
+            return res.status(401).send({ message: info?.message || 'error' });
+        }
+        req.user = user;
+        return next();
+    })(req, res, next);
+}, AuthController.login);
 
 /**
  * @swagger

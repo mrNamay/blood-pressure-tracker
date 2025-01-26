@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import UserService from '../services/user';
 import { IUser } from '../models/user';
+import { ITokenUser } from '../config/passport';
 
 class AuthController {
     /**
@@ -18,20 +19,20 @@ class AuthController {
     }
 
     /**
-     * Login and generate a JWT token
+     * Send authenticated user details
      */
     static async login(req: Request, res: Response) {
         try {
-            const user = req.user as IUser;
+            const user = req.user as ITokenUser;
 
             // Generate a JWT token
             const token = jwt.sign(
-                { id: user._id, email: user.email, name: user.name },
+                user,
                 process.env.JWT_SECRET || 'your_secret_key',
                 { expiresIn: '1h' }
             );
 
-            res.status(200).json({ message: 'Login successful.', token, userId: user._id });
+            res.status(200).json({ message: 'Login successful.', token, userId: user.id });
         } catch (error: any) {
             res.status(500).json({ message: error.message });
         }
@@ -42,7 +43,7 @@ class AuthController {
      */
     static async getMyProfile(req: Request, res: Response) {
         try {
-            const user = req.user as IUser;
+            const user = req.user as ITokenUser;
             res.status(200).json(user);
         } catch (error: any) {
             res.status(500).json({ message: error.message });
