@@ -24,6 +24,10 @@ app.use(passport.initialize());
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get('/swagger.json', (req, res) => {
+  res.json(swaggerSpec);
+});
+
 // Routes
 app.use('/api', apiRouter);
 
