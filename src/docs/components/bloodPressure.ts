@@ -56,7 +56,6 @@
  *           type: string
  *           format: date-time
  *           description: Timestamp of the reading
- *           default: now
  *         notes:
  *           $ref: '#/components/schemas/ReadingNotes'
  *       required:

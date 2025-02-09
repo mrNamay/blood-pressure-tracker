@@ -74,6 +74,7 @@ authRouter.post('/register', AuthController.register);
  *                   type: string
  *                 userId:
  *                   $ref: '#/components/schemas/UserId'
+ *               required: [token, userId]
  *       401:
  *         $ref: '#/components/responses/UnauthorizedError'
  *       400:
